@@ -19,6 +19,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'luochen1990/rainbow'
 Plug 'patstockwell/vim-monokai-tasty'
 Plug 'preservim/nerdcommenter'
+Plug 'vim-scripts/c.vim'
 call plug#end()
 
 
