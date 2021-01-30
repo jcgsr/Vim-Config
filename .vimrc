@@ -30,6 +30,8 @@ set number
 set tabstop=2
 set smartindent
 set shiftwidth=2
+set noshowmode
+set laststatus=2
 set expandtab
 set ai
 filetype on
