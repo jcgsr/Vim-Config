@@ -20,6 +20,7 @@ Plug 'luochen1990/rainbow'
 Plug 'patstockwell/vim-monokai-tasty'
 Plug 'preservim/nerdcommenter'
 Plug 'vim-scripts/c.vim'
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 call plug#end()
 
 
