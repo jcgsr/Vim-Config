@@ -40,6 +40,13 @@ filetype indent on
 
 set termguicolors
 
+set t_Co=256
+ 
+set colorcolumn=72
+set textwidth=72
+set wrap
+set linebreak
+
 " NERDTree
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeMinimalUI = 1
