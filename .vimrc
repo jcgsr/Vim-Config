@@ -1,4 +1,5 @@
 call plug#begin()
+Plug 'leafOfTree/vim-vue-plugin'
 Plug 'posva/vim-vue'
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -89,15 +90,15 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
-" let g:vim_monokai_tasty_italic = 1
-" let g:lightline = {
-  "    \ 'colorscheme': 'monokai_tasty' 
-   "   \ }
-" let g:airline_theme = 'monokai_tasty'
-"
+let g:vim_monokai_tasty_italic = 1
+let g:lightline = {
+     \ 'colorscheme': 'monokai_tasty' 
+     \ }
+let g:airline_theme = 'monokai_tasty'
+
 " material theme settings 
-let g:material_theme_style = 'dark'
-let g:material_terminal_italics = 1
+" let g:material_theme_style = 'dark'
+" let g:material_terminal_italics = 1
 
 " Color Scheme
 set background=dark
