@@ -1,4 +1,5 @@
 call plug#begin()
+Plug 'posva/vim-vue'
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'scrooloose/nerdtree'
@@ -37,6 +38,8 @@ set ai
 filetype on
 filetype plugin on
 filetype indent on
+
+syntax sync fromstart
 
 set termguicolors
 
