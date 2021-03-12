@@ -47,6 +47,10 @@ set textwidth=72
 set wrap
 set linebreak
 
+set path=.,,**
+
+set mouse=a
+
 " NERDTree
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeMinimalUI = 1
