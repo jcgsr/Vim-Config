@@ -20,9 +20,21 @@ Plug 'kaicataldo/material.vim', { 'branch': 'main' }
 Plug 'itchyny/lightline.vim'
 Plug 'luochen1990/rainbow'
 Plug 'patstockwell/vim-monokai-tasty'
+Plug 'crusoexia/vim-monokai'
+Plug 'gosukiwi/vim-atom-dark'
+Plug 'dracula/vim', { 'as': 'dracula'  }
+Plug 'morhetz/gruvbox'
+Plug 'tomasr/molokai'
+Plug 'vim-scripts/Zenburn'
+Plug 'sjl/badwolf'
+Plug 'ayu-theme/ayu-vim'
+Plug 'nanotech/jellybeans.vim'
 Plug 'preservim/nerdcommenter'
 Plug 'vim-scripts/c.vim'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+Plug 'itchyny/lightline.vim'
+Plug 'sirver/ultisnips'
+" Plug 'zxqfl/tabnine-vim'
 call plug#end()
 
 
