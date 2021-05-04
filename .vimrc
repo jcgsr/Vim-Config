@@ -1,5 +1,7 @@
 call plug#begin()
 Plug 'leafOfTree/vim-vue-plugin'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'yuezk/vim-js'
 Plug 'posva/vim-vue'
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -55,7 +57,6 @@ filetype indent on
 syntax sync fromstart
 
 set termguicolors
-
 set t_Co=256
  
 set colorcolumn=72
@@ -165,6 +166,8 @@ let g:LanguageClient_serverCommands = {
     \ 'vue': ['vls']
     \ }
 
+map <F8> :w <CR> :!gcc % -o %< && ./%< <CR>
+
 nnoremap <C-p> :FZF<CR>
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
@@ -174,4 +177,4 @@ let g:fzf_action = {
 
 " Brackets/Parenthesis color
 let g:rainbow_active = 1
-
+  
