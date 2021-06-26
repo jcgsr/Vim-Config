@@ -37,6 +37,11 @@ Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'itchyny/lightline.vim'
 Plug 'sirver/ultisnips'
 " Plug 'zxqfl/tabnine-vim'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'mattn/emmet-vim'
+Plug 'inkarkat/vim-linejuggler'
+Plug 'inkarkat/vim-ingo-library'
 call plug#end()
 
 
@@ -103,7 +108,9 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
-let g:vim_monokai_tasty_italic = 1
+" let g:vim_monokai_tasty_italic = 1
+" colorscheme vim-monokai-tasty
+
 let g:lightline = {
      \ 'colorscheme': 'monokai_tasty' 
      \ }
@@ -115,9 +122,18 @@ let g:airline_theme = 'monokai_tasty'
 
 " Color Scheme
 set background=dark
-colorscheme vim-monokai-tasty 
+colorscheme dracula 
 hi Normal ctermbg=16 guibg=#111110                                      
 hi LineNr ctermbg=16 guibg=#111110 
+
+"Emmet
+
+let g:user_emmet_leader_key='<Tab>'
+let g:user_emmet_settings = {
+  \  'javascript.jsx' : {
+    \      'extends' : 'jsx',
+    \  },
+  \}
 
 " COC
 let g:coc_global_extensions = [
