@@ -6,7 +6,6 @@ Plug 'posva/vim-vue'
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'scrooloose/nerdtree'
-Plug 'ryanoasis/vim-devicons'
 Plug 'phanviet/vim-monokai-pro'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -18,17 +17,13 @@ Plug 'tpope/vim-rhubarb'
 Plug 'junegunn/gv.vim'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'rakr/vim-one'
-Plug 'kaicataldo/material.vim', { 'branch': 'main' }
 Plug 'itchyny/lightline.vim'
 Plug 'luochen1990/rainbow'
 Plug 'patstockwell/vim-monokai-tasty'
 Plug 'crusoexia/vim-monokai'
 Plug 'gosukiwi/vim-atom-dark'
-Plug 'dracula/vim', { 'as': 'dracula'  }
-Plug 'morhetz/gruvbox'
+Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'tomasr/molokai'
-Plug 'vim-scripts/Zenburn'
-Plug 'sjl/badwolf'
 Plug 'ayu-theme/ayu-vim'
 Plug 'nanotech/jellybeans.vim'
 Plug 'preservim/nerdcommenter'
@@ -38,12 +33,16 @@ Plug 'itchyny/lightline.vim'
 Plug 'sirver/ultisnips'
 " Plug 'zxqfl/tabnine-vim'
 Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
 Plug 'mxw/vim-jsx'
 Plug 'mattn/emmet-vim'
 Plug 'inkarkat/vim-linejuggler'
 Plug 'inkarkat/vim-ingo-library'
+Plug 'ryanoasis/vim-devicons'
+Plug 'mlaursen/vim-react-snippets'
+Plug 'plasticboy/vim-markdown'
+Plug 'jparise/vim-graphql'
 call plug#end()
-
 
 "Seção de configuração
 set encoding=UTF-8
@@ -51,19 +50,21 @@ set number
 set tabstop=2
 set smartindent
 set shiftwidth=2
-set noshowmode
-set laststatus=2
 set expandtab
+set laststatus=2
+set noshowmode
 set ai
 filetype on
 filetype plugin on
 filetype indent on
 
+set clipboard=unnamedplus 
+
 syntax sync fromstart
 
 set termguicolors
-set t_Co=256
- 
+set t_Co=256 
+
 set colorcolumn=72
 set textwidth=72
 set wrap
@@ -98,7 +99,10 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " Toggle
-nnoremap <silent> <C-b> :NERDTreeToggle<CR>
+nnoremap <silent> <leader>n :NERDTreeToggle<CR>
+
+" C compile
+map <F8> :w <CR> :!gcc % -o %< && ./%< <CR>
 
 " True colors
 if (has("nvim"))
@@ -112,19 +116,19 @@ endif
 " colorscheme vim-monokai-tasty
 
 let g:lightline = {
-     \ 'colorscheme': 'monokai_tasty' 
-     \ }
+    \ 'colorscheme': 'monokai_tasty' 
+   \ }
 let g:airline_theme = 'monokai_tasty'
 
-" material theme settings 
+" material theme settings
 " let g:material_theme_style = 'dark'
 " let g:material_terminal_italics = 1
 
 " Color Scheme
 set background=dark
 colorscheme dracula 
-hi Normal ctermbg=16 guibg=#111110                                      
-hi LineNr ctermbg=16 guibg=#111110 
+hi Normal ctermbg=16 guibg=#111110
+hi LineNr ctermbg=16 guibg=#111110
 
 "Emmet
 
@@ -182,8 +186,6 @@ let g:LanguageClient_serverCommands = {
     \ 'vue': ['vls']
     \ }
 
-map <F8> :w <CR> :!gcc % -o %< && ./%< <CR>
-
 nnoremap <C-p> :FZF<CR>
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
@@ -193,4 +195,7 @@ let g:fzf_action = {
 
 " Brackets/Parenthesis color
 let g:rainbow_active = 1
-  
+
+" Copy to clipboard
+noremap <Leader>y "+y
+noremap <Leader>p "+p
