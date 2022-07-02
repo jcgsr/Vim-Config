@@ -9,7 +9,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'phanviet/vim-monokai-pro'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', 
 Plug 'jiangmiao/auto-pairs' "this will auto close ( [ {
 Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-fugitive'
@@ -32,6 +32,7 @@ Plug 'sirver/ultisnips'
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'mxw/vim-jsx'
+Plug 'mfussenegger/nvim-jdtls'
 Plug 'mattn/emmet-vim'
 Plug 'inkarkat/vim-linejuggler'
 Plug 'inkarkat/vim-ingo-library'
@@ -56,7 +57,7 @@ filetype on
 filetype plugin on
 filetype indent on
 
-set clipboard=unnamedplus 
+set clipboard+=unnamedplus 
 
 syntax sync fromstart
 
@@ -155,7 +156,8 @@ let g:coc_global_extensions = [
     \  'coc-eslint',
     \  'coc-jedi',
     \  'coc-python',
-    \  'coc-clangd'
+    \  'coc-clangd',
+    \  'coc-java'
     \   ]
 
 " Coc
@@ -207,4 +209,5 @@ noremap <Leader>p "+p
 " Clang
 
 let g:clang_format#auto_format=1
-g:clang_format#code_style=llvm
+" g:clang_format#code_style=llvm
+
