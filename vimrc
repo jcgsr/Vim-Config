@@ -42,6 +42,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'mlaursen/vim-react-snippets'
 Plug 'plasticboy/vim-markdown'
 Plug 'jparise/vim-graphql'
+Plug 'rust-lang/rust.vim'
 call plug#end()
 
 "Seção de configuração
@@ -64,6 +65,7 @@ syntax sync fromstart
 
 set termguicolors
 set t_Co=256 
+set term=xterm-256color
 
 set colorcolumn=72
 set textwidth=72
@@ -73,6 +75,10 @@ set linebreak
 set path=.,,**
 
 set mouse=a
+
+inoremap <Esc> <Esc>:w<CR>
+
+vnoremap <C-C> :w !xclip -i -sel c<CR><CR>
 
 " NERDTree
 let g:NERDTreeShowHidden = 1
@@ -152,31 +158,21 @@ let g:coc_global_extensions = [
     \  'coc-eslint',
     \  'coc-jedi',
     \  'coc-python',
+    \  'coc-rust-analyzer',
     \   ]
+
+" Prettier
+command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 
 " Coc
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
-
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-autocmd CursorHold * silent call CocActionAsync('highlight')
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-
-" Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 
 " Create default mappings
 let g:NERDCreateDefaultMappings = 1
@@ -199,3 +195,4 @@ let g:rainbow_active = 1
 " Copy to clipboard
 noremap <Leader>y "+y
 noremap <Leader>p "+p
+
