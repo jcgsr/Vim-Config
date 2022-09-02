@@ -41,6 +41,7 @@ Plug 'mlaursen/vim-react-snippets'
 Plug 'plasticboy/vim-markdown'
 Plug 'jparise/vim-graphql'
 Plug 'rhysd/vim-clang-format'
+Plug 'rust-lang/rust.vim'
 call plug#end()
 
 "Seção de configuração
@@ -157,7 +158,8 @@ let g:coc_global_extensions = [
     \  'coc-jedi',
     \  'coc-python',
     \  'coc-clangd',
-    \  'coc-java'
+    \  'coc-java',
+    \  'coc-rust-analyzer',
     \   ]
 
 " Coc
