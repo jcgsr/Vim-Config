@@ -3,4 +3,4 @@ Configuração que eu uso tanto no Vim quanto no NeoVim.
 
 Configurado para HTML, CSS, JS, C, Tailwind e Vue (snippets, autocomplete, fuzzyfinder).
 
-Dicas de como iniciar no Vim: [https://awesome-perlman-211a20.netlify.app/](https://vimprimeirosite.netlify.app/)
+Dicas de como iniciar no Vim: [vim](https://vimprimeirosite.netlify.app/)
