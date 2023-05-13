@@ -1,3 +1,4 @@
+set nocompatible
 call plug#begin()
 Plug 'leafOfTree/vim-vue-plugin'
 Plug 'maxmellon/vim-jsx-pretty'
@@ -6,7 +7,6 @@ Plug 'posva/vim-vue'
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'scrooloose/nerdtree'
-Plug 'phanviet/vim-monokai-pro'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -15,23 +15,19 @@ Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'junegunn/gv.vim'
-Plug 'drewtempelmeyer/palenight.vim'
 Plug 'rakr/vim-one'
 Plug 'itchyny/lightline.vim'
 Plug 'luochen1990/rainbow'
 Plug 'patstockwell/vim-monokai-tasty'
 Plug 'crusoexia/vim-monokai'
-Plug 'gosukiwi/vim-atom-dark'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'tomasr/molokai'
-Plug 'ayu-theme/ayu-vim'
-Plug 'nanotech/jellybeans.vim'
+Plug 'NLKNguyen/papercolor-theme'
 Plug 'preservim/nerdcommenter'
 Plug 'vim-scripts/c.vim'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'itchyny/lightline.vim'
 Plug 'sirver/ultisnips'
-" Plug 'zxqfl/tabnine-vim'
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'mxw/vim-jsx'
@@ -43,6 +39,7 @@ Plug 'mlaursen/vim-react-snippets'
 Plug 'plasticboy/vim-markdown'
 Plug 'jparise/vim-graphql'
 Plug 'rust-lang/rust.vim'
+Plug 'w0rp/ale', { 'do': 'pip install flake8 isort yapf' }
 call plug#end()
 
 "Seção de configuração
@@ -76,10 +73,9 @@ set path=.,,**
 
 set mouse=a
 
-inoremap <Esc> <Esc>:w<CR>
+"inoremap <Esc> <Esc>:w<CR>
 
 vnoremap <C-C> :w !xclip -i -sel c<CR><CR>
-
 " NERDTree
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeMinimalUI = 1
@@ -118,21 +114,13 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
-" let g:vim_monokai_tasty_italic = 1
-" colorscheme vim-monokai-tasty
+let g:vim_monokai_tasty_italic = 1
+colorscheme vim-monokai-tasty
 
-let g:lightline = {
-    \ 'colorscheme': 'monokai_tasty' 
-   \ }
-let g:airline_theme = 'monokai_tasty'
-
-" material theme settings
-" let g:material_theme_style = 'dark'
-" let g:material_terminal_italics = 1
+let g:airline_theme = 'vim_monokai_tasty'
 
 " Color Scheme
 set background=dark
-colorscheme dracula 
 hi Normal ctermbg=16 guibg=#111110
 hi LineNr ctermbg=16 guibg=#111110
 
@@ -157,14 +145,9 @@ let g:coc_global_extensions = [
     \  'coc-prettier',
     \  'coc-eslint',
     \  'coc-jedi',
-    \  'coc-python',
     \  'coc-rust-analyzer',
     \   ]
 
-" Prettier
-command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
-
-" Coc
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -173,6 +156,9 @@ nmap <silent> gr <Plug>(coc-references)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+
+" Prettier
+command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 
 " Create default mappings
 let g:NERDCreateDefaultMappings = 1
@@ -196,3 +182,15 @@ let g:rainbow_active = 1
 noremap <Leader>y "+y
 noremap <Leader>p "+p
 
+
+" Ale
+let g:ale_fix_on_save = 1
+let g:ale_fixers = {
+\   'python': [
+\       'isort',
+\       'yapf',
+\       'remove_trailing_lines',
+\       'trim_whitespace'
+\   ],
+\   'javascript': ['prettier']
+\}
