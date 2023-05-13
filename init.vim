@@ -1,3 +1,4 @@
+set nocompatible
 call plug#begin()
 Plug 'leafOfTree/vim-vue-plugin'
 Plug 'maxmellon/vim-jsx-pretty'
@@ -6,10 +7,9 @@ Plug 'posva/vim-vue'
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'scrooloose/nerdtree'
-Plug 'phanviet/vim-monokai-pro'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'neoclide/coc.nvim', 
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jiangmiao/auto-pairs' "this will auto close ( [ {
 Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-fugitive'
@@ -22,8 +22,7 @@ Plug 'patstockwell/vim-monokai-tasty'
 Plug 'crusoexia/vim-monokai'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'tomasr/molokai'
-Plug 'ayu-theme/ayu-vim'
-Plug 'nanotech/jellybeans.vim'
+Plug 'NLKNguyen/papercolor-theme'
 Plug 'preservim/nerdcommenter'
 Plug 'vim-scripts/c.vim'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
@@ -32,7 +31,6 @@ Plug 'sirver/ultisnips'
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'mxw/vim-jsx'
-Plug 'mfussenegger/nvim-jdtls'
 Plug 'mattn/emmet-vim'
 Plug 'inkarkat/vim-linejuggler'
 Plug 'inkarkat/vim-ingo-library'
@@ -40,8 +38,8 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'mlaursen/vim-react-snippets'
 Plug 'plasticboy/vim-markdown'
 Plug 'jparise/vim-graphql'
-Plug 'rhysd/vim-clang-format'
 Plug 'rust-lang/rust.vim'
+Plug 'w0rp/ale', { 'do': 'pip install flake8 isort yapf' }
 call plug#end()
 
 "Seção de configuração
@@ -57,13 +55,14 @@ set ai
 filetype on
 filetype plugin on
 filetype indent on
-
-set clipboard+=unnamedplus 
+set guicursor=a:blinkon100
+set clipboard=unnamedplus 
 
 syntax sync fromstart
 
 set termguicolors
 set t_Co=256 
+"set term=xterm-256color
 
 set colorcolumn=72
 set textwidth=72
@@ -74,10 +73,9 @@ set path=.,,**
 
 set mouse=a
 
-" :au FocusLost * :wa
+"inoremap <Esc> <Esc>:w<CR>
 
-inoremap <Esc> <Esc>:w<CR>
-
+vnoremap <C-C> :w !xclip -i -sel c<CR><CR>
 " NERDTree
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeMinimalUI = 1
@@ -108,14 +106,6 @@ nnoremap <silent> <leader>n :NERDTreeToggle<CR>
 " C compile
 map <F8> :w <CR> :!gcc % -o %< && ./%< <CR>
 
-" Cursor 
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
-
-" Default : "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
-set guicursor=v-c-sm:block,n-i-ci-ve:block,r-cr-o:hor20
-
-set guicursor=a:blinkon100
-
 " True colors
 if (has("nvim"))
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
@@ -124,14 +114,13 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
-let g:lightline = {
-    \ 'colorscheme': 'monokai_tasty' 
-   \ }
-let g:airline_theme = 'monokai_tasty'
+let g:vim_monokai_tasty_italic = 1
+colorscheme vim-monokai-tasty
+
+let g:airline_theme = 'vim_monokai_tasty'
 
 " Color Scheme
 set background=dark
-colorscheme dracula 
 hi Normal ctermbg=16 guibg=#111110
 hi LineNr ctermbg=16 guibg=#111110
 
@@ -156,35 +145,20 @@ let g:coc_global_extensions = [
     \  'coc-prettier',
     \  'coc-eslint',
     \  'coc-jedi',
-    \  'coc-python',
-    \  'coc-clangd',
-    \  'coc-java',
     \  'coc-rust-analyzer',
     \   ]
 
-" Coc
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
-
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-autocmd CursorHold * silent call CocActionAsync('highlight')
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-
-" Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" Prettier
+command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 
 " Create default mappings
 let g:NERDCreateDefaultMappings = 1
@@ -208,8 +182,16 @@ let g:rainbow_active = 1
 noremap <Leader>y "+y
 noremap <Leader>p "+p
 
-" Clang
 
-let g:clang_format#auto_format=1
-" g:clang_format#code_style=llvm
+" Ale
+let g:ale_fix_on_save = 1
+let g:ale_fixers = {
+\   'python': [
+\       'isort',
+\       'yapf',
+\       'remove_trailing_lines',
+\       'trim_whitespace'
+\   ],
+\   'javascript': ['prettier']
+\}
 
