@@ -1,10 +1,12 @@
+set nocompatible
+
+" automatic installation
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
   silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-set nocompatible
 call plug#begin()
 Plug 'leafOfTree/vim-vue-plugin'
 Plug 'maxmellon/vim-jsx-pretty'
@@ -27,6 +29,7 @@ Plug 'luochen1990/rainbow'
 Plug 'patstockwell/vim-monokai-tasty'
 Plug 'crusoexia/vim-monokai'
 Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'sainnhe/everforest'
 Plug 'tomasr/molokai'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'preservim/nerdcommenter'
@@ -46,6 +49,8 @@ Plug 'plasticboy/vim-markdown'
 Plug 'jparise/vim-graphql'
 Plug 'rust-lang/rust.vim'
 Plug 'w0rp/ale', { 'do': 'pip install flake8 isort yapf' }
+Plug 'othree/html5.vim'
+Plug 'evanleck/vim-svelte', {'branch': 'main'}
 call plug#end()
 
 "Seção de configuração
@@ -61,8 +66,12 @@ set ai
 filetype on
 filetype plugin on
 filetype indent on
-
+set hlsearch
+nnoremap <CR> :noh<CR><CR>
 set clipboard=unnamedplus 
+let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
 syntax sync fromstart
 
@@ -79,9 +88,53 @@ set path=.,,**
 
 set mouse=a
 
-"inoremap <Esc> <Esc>:w<CR>
+" mappings
+:nnoremap <leader>di di'
+:nnoremap <leader>{ va{
 
-vnoremap <C-C> :w !xclip -i -sel c<CR><CR>
+nmap <C-s> <Esc>:w<CR>
+imap <C-s> <Esc>:w<CR>
+
+nmap ; :
+
+" Copy to clipboard
+noremap <C-y> "*y
+noremap <C-p> "*p
+
+" screens
+nnoremap <leader>b <C-w>v
+nnoremap <leader>bd <C-w>s
+nnoremap <leader>x <Esc>:q<CR>
+nnoremap <C-l> <C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+
+" tabs 
+nnoremap <leader>t <Esc>:tabnew<CR>
+nnoremap <tab> gt
+
+" cursor moving
+nnoremap <leader>e $
+
+" cursor_behaviour
+augroup cursor_behaviour
+    autocmd!
+
+    " reset cursor on start:
+    autocmd VimEnter * silent !echo -ne "\e[2 q"
+    " cursor blinking bar on insert mode
+    let &t_SI = "\e[5 q"
+    " cursor steady block on command mode
+    let &t_EI = "\e[2 q"
+
+    " highlight current line when in insert mode
+    autocmd InsertEnter * set cursorline
+    " turn off current line highlighting when leaving insert mode
+    autocmd InsertLeave * set nocursorline
+
+augroup END
+
 " NERDTree
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeMinimalUI = 1
@@ -120,13 +173,23 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
-let g:vim_monokai_tasty_italic = 1
-colorscheme vim-monokai-tasty
+  " For dark version.
+        "set background=dark
 
-let g:airline_theme = 'vim_monokai_tasty'
+        " For light version.
+        set background=light
 
+        " Set contrast.
+        " This configuration option should be placed before `colorscheme everforest`.
+        " Available values: 'hard', 'medium'(default), 'soft'
+        let g:everforest_background = 'soft'
+
+        " For better performance
+        let g:everforest_better_performance = 1
+
+        colorscheme everforest
 " Color Scheme
-set background=dark
+"set background=light
 hi Normal ctermbg=16 guibg=#111110
 hi LineNr ctermbg=16 guibg=#111110
 
@@ -183,11 +246,6 @@ let g:fzf_action = {
 
 " Brackets/Parenthesis color
 let g:rainbow_active = 1
-
-" Copy to clipboard
-noremap <Leader>y "+y
-noremap <Leader>p "+p
-
 
 " Ale
 let g:ale_fix_on_save = 1
