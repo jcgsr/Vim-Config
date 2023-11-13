@@ -85,6 +85,11 @@ set path=.,,**
 
 set mouse=a
 
+" search case sensitive
+set ignorecase
+set smartcase
+set incsearch
+
 " mappings
 :nnoremap <leader>di di'
 :nnoremap <leader>{ va{
