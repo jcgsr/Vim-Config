@@ -8,13 +8,13 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
 endif
 
 call plug#begin()
-Plug 'leafOfTree/vim-vue-plugin'
+Plug 'leafOfTree/vim-vue-plugin', {'for': 'vue'}
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'yuezk/vim-js'
-Plug 'posva/vim-vue'
-Plug 'preservim/nerdtree'
+Plug 'posva/vim-vue', {'for': 'vue'}
+Plug 'preservim/nerdtree', {'on': 'NERDCommenterToggle'}
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle', 'NERDTreeFind']}
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -23,31 +23,28 @@ Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'junegunn/gv.vim'
-Plug 'rakr/vim-one'
+Plug 'rakr/vim-one' "color
 Plug 'itchyny/lightline.vim'
-Plug 'luochen1990/rainbow'
-Plug 'patstockwell/vim-monokai-tasty'
-Plug 'crusoexia/vim-monokai'
-Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'sainnhe/everforest'
-Plug 'tomasr/molokai'
-Plug 'NLKNguyen/papercolor-theme'
-Plug 'preservim/nerdcommenter'
-Plug 'vim-scripts/c.vim'
+Plug 'luochen1990/rainbow' "color for Parenthesis
+Plug 'patstockwell/vim-monokai-tasty' "color
+Plug 'crusoexia/vim-monokai' "color
+Plug 'dracula/vim', { 'as': 'dracula' } "color
+Plug 'sainnhe/everforest' "color
+Plug 'tomasr/molokai' "color
+Plug 'NLKNguyen/papercolor-theme' "color
+Plug 'preservim/nerdcommenter', {'on': 'NERDCommenterToggle'}
+Plug 'vim-scripts/c.vim', {'for': 'c'}
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-Plug 'itchyny/lightline.vim'
 Plug 'sirver/ultisnips'
-Plug 'pangloss/vim-javascript'
-Plug 'leafgarland/typescript-vim'
-Plug 'mxw/vim-jsx'
+Plug 'pangloss/vim-javascript', {'for': 'js'}
+Plug 'leafgarland/typescript-vim', {'for': 'ts'}
+Plug 'mxw/vim-jsx', {'for': 'jsx'}
 Plug 'mattn/emmet-vim'
-Plug 'inkarkat/vim-linejuggler'
 Plug 'inkarkat/vim-ingo-library'
 Plug 'ryanoasis/vim-devicons'
-Plug 'mlaursen/vim-react-snippets'
-Plug 'plasticboy/vim-markdown'
-Plug 'jparise/vim-graphql'
-Plug 'rust-lang/rust.vim'
+Plug 'mlaursen/vim-react-snippets', {'for': 'jsx'}
+Plug 'plasticboy/vim-markdown', {'for': ['markdown', 'md']}
+Plug 'rust-lang/rust.vim', {'for': ['rs', 'rust']}
 Plug 'w0rp/ale', { 'do': 'pip install flake8 isort yapf' }
 Plug 'othree/html5.vim'
 Plug 'evanleck/vim-svelte', {'branch': 'main'}
@@ -135,6 +132,16 @@ augroup cursor_behaviour
 
 augroup END
 
+" moving lines 
+nnoremap <leader><up> <Esc>:move -2<CR>
+nnoremap <leader><down> <Esc>:move +1<CR>
+vnoremap <leader><up> <Esc>:move -2<CR>
+vnoremap <leader><down> <Esc>:move +1<CR>
+
+"git 
+nnoremap <leader>gs <Esc>:Git status<CR>
+nnoremap <leader>gp <Esc>:Git push<CR>
+
 " NERDTree
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeMinimalUI = 1
@@ -173,11 +180,14 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
+nnoremap <silent><expr><leader>bg printf(":set bg=%s \| colo %s\r",&bg==# 'dark' ? 'light' : 'dark', &bg ==# 'dark' ? 'everforest' :
+      \'molokai')
+
   " For dark version.
-        "set background=dark
+        set background=dark
 
         " For light version.
-        set background=light
+        "set background=light
 
         " Set contrast.
         " This configuration option should be placed before `colorscheme everforest`.
@@ -187,9 +197,11 @@ endif
         " For better performance
         let g:everforest_better_performance = 1
 
-        colorscheme everforest
+        let g:molokai_original = 1
+        colorscheme molokai
+
+
 " Color Scheme
-"set background=light
 hi Normal ctermbg=16 guibg=#111110
 hi LineNr ctermbg=16 guibg=#111110
 
