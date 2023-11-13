@@ -91,8 +91,12 @@ set smartcase
 set incsearch
 
 " mappings
-:nnoremap <leader>di di'
-:nnoremap <leader>{ va{
+:nnoremap <leader>' di'
+:nnoremap <leader>'' di"
+:nnoremap <leader>s' ci'
+:nnoremap <leader>s'' ci"
+:nmap <leader>[ va{
+":nmap <leader>[ va[
 
 nmap <C-s> <Esc>:w<CR>
 imap <C-s> <Esc>:w<CR>
@@ -142,6 +146,9 @@ nnoremap <leader><up> <Esc>:move -2<CR>
 nnoremap <leader><down> <Esc>:move +1<CR>
 vnoremap <leader><up> <Esc>:move -2<CR>
 vnoremap <leader><down> <Esc>:move +1<CR>
+
+" select and replace 
+nnoremap <leader>ss <Esc>gnc
 
 "git 
 nnoremap <leader>gs <Esc>:Git status<CR>
