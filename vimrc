@@ -26,13 +26,12 @@ Plug 'junegunn/gv.vim'
 Plug 'rakr/vim-one' "color
 Plug 'itchyny/lightline.vim'
 Plug 'luochen1990/rainbow' "color for Parenthesis
-Plug 'patstockwell/vim-monokai-tasty' "color
 Plug 'crusoexia/vim-monokai' "color
 Plug 'dracula/vim', { 'as': 'dracula' } "color
 Plug 'sainnhe/everforest' "color
 Plug 'tomasr/molokai' "color
 Plug 'NLKNguyen/papercolor-theme' "color
-Plug 'preservim/nerdcommenter', {'on': 'NERDCommenterToggle'}
+Plug 'preservim/nerdcommenter' 
 Plug 'vim-scripts/c.vim', {'for': 'c'}
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'sirver/ultisnips'
@@ -91,6 +90,7 @@ set smartcase
 set incsearch
 
 " mappings
+let mapleader = ' '
 :nnoremap <leader>' di'
 :nnoremap <leader>'' di"
 :nnoremap <leader>s' ci'
@@ -152,6 +152,7 @@ nnoremap <leader>ss <Esc>gnc
 
 "git 
 nnoremap <leader>gs <Esc>:Git status<CR>
+nnoremap <leader>ga <Esc>:Git add .<left><left><left><CR>
 nnoremap <leader>gp <Esc>:Git push<CR>
 
 " NERDTree
@@ -212,10 +213,10 @@ nnoremap <silent><expr><leader>bg printf(":set bg=%s \| colo %s\r",&bg==# 'dark'
         let g:molokai_original = 1
         colorscheme molokai
 
-
-" Color Scheme
+        " Color Scheme
 hi Normal ctermbg=16 guibg=#111110
 hi LineNr ctermbg=16 guibg=#111110
+
 
 "Emmet
 
