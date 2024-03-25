@@ -65,17 +65,22 @@ map("n", "<C-k>", "<C-w>k", opts)
 map("n", "<leader>t", "<ESc>:tabnew<CR>", opts)
 map("n", "<tab>", "gt", opts)
 
+-- moving lines
+map("n", "<leader><up>", "<Esc>:move -2<CR>", opts)
+map("n", "<leader><down>", "<Esc>:move +1<CR>", opts)
+
+
 -- colors
 -- cmd [[colorscheme monokai]]
 
 function Light()
-	set.background = "light"
-	cmd([[colorscheme everforest]])
+  set.background = "light"
+  cmd([[colorscheme everforest]])
 end
 
 function Dark()
-	set.background = "dark"
-	cmd([[colorscheme monokai]])
+  set.background = "dark"
+  cmd([[colorscheme monokai]])
 end
 
 map("n", "<leader>bl", ":lua Light()<CR>", opts)
