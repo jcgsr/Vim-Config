@@ -8,10 +8,8 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
 endif
 
 call plug#begin()
-Plug 'leafOfTree/vim-vue-plugin', {'for': 'vue'}
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'yuezk/vim-js'
-Plug 'posva/vim-vue', {'for': 'vue'}
 Plug 'preservim/nerdtree', {'on': 'NERDCommenterToggle'}
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle', 'NERDTreeFind']}
@@ -23,14 +21,13 @@ Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'junegunn/gv.vim'
-Plug 'rakr/vim-one' "color
+Plug 'crusoexia/vim-monokai' "color
+Plug 'sainnhe/everforest' "color
+Plug 'dracula/vim', { 'as': 'dracula' } "color
+Plug 'NLKNguyen/papercolor-theme' "color
+Plug 'tomasr/molokai' "color
 Plug 'itchyny/lightline.vim'
 Plug 'luochen1990/rainbow' "color for Parenthesis
-Plug 'crusoexia/vim-monokai' "color
-Plug 'dracula/vim', { 'as': 'dracula' } "color
-Plug 'sainnhe/everforest' "color
-Plug 'tomasr/molokai' "color
-Plug 'NLKNguyen/papercolor-theme' "color
 Plug 'preservim/nerdcommenter' 
 Plug 'vim-scripts/c.vim', {'for': 'c'}
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
@@ -43,7 +40,6 @@ Plug 'inkarkat/vim-ingo-library'
 Plug 'ryanoasis/vim-devicons'
 Plug 'mlaursen/vim-react-snippets', {'for': 'jsx'}
 Plug 'plasticboy/vim-markdown', {'for': ['markdown', 'md']}
-Plug 'rust-lang/rust.vim', {'for': ['rs', 'rust']}
 Plug 'w0rp/ale', { 'do': 'pip install flake8 isort yapf' }
 Plug 'othree/html5.vim'
 Plug 'evanleck/vim-svelte', {'branch': 'main'}
@@ -63,7 +59,7 @@ filetype on
 filetype plugin on
 filetype indent on
 set hlsearch
-nnoremap <CR> :noh<CR><CR>
+nnoremap <Esc> :noh<CR><CR>
 set clipboard=unnamedplus 
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_SR = "\<Esc>]50;CursorShape=2\x7"
@@ -120,6 +116,9 @@ nnoremap <C-k> <C-w>k
 nnoremap <leader>t <Esc>:tabnew<CR>
 nnoremap <tab> gt
 
+" like telescope 
+nnoremap <C-p> :find ./**/*
+
 " cursor moving
 nnoremap <leader>e $
 
@@ -144,8 +143,6 @@ augroup END
 " moving lines 
 nnoremap <leader><up> <Esc>:move -2<CR>
 nnoremap <leader><down> <Esc>:move +1<CR>
-vnoremap <leader><up> <Esc>:move -2<CR>
-vnoremap <leader><down> <Esc>:move +1<CR>
 
 " select and replace 
 nnoremap <leader>ss <Esc>gnc
@@ -161,6 +158,10 @@ let g:NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 let g:NERDTreeIgnore = []
 let g:NERDTreeStatusline = ''
+
+" Start NERDTree when Vim is started without file arguments.
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
 
 "nerdtree-git-plugin
 let g:NERDTreeGitStatusIndicatorMapCustom = {
@@ -194,7 +195,7 @@ if (has("termguicolors"))
 endif
 
 nnoremap <silent><expr><leader>bg printf(":set bg=%s \| colo %s\r",&bg==# 'dark' ? 'light' : 'dark', &bg ==# 'dark' ? 'everforest' :
-      \'molokai')
+      \'sublimemonokai')
 
   " For dark version.
         set background=dark
@@ -209,9 +210,8 @@ nnoremap <silent><expr><leader>bg printf(":set bg=%s \| colo %s\r",&bg==# 'dark'
 
         " For better performance
         let g:everforest_better_performance = 1
-
-        let g:molokai_original = 1
-        colorscheme molokai
+        let g:sublimemonokai_term_italic = 1
+        colorscheme sublimemonokai
 
         " Color Scheme
 hi Normal ctermbg=16 guibg=#111110
