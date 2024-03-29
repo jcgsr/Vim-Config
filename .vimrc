@@ -8,10 +8,8 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
 endif
 
 call plug#begin()
-Plug 'leafOfTree/vim-vue-plugin', {'for': 'vue'}
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'yuezk/vim-js'
-Plug 'posva/vim-vue', {'for': 'vue'}
 Plug 'preservim/nerdtree', {'on': 'NERDCommenterToggle'}
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle', 'NERDTreeFind']}
@@ -23,14 +21,11 @@ Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'junegunn/gv.vim'
-Plug 'rakr/vim-one' "color
 Plug 'itchyny/lightline.vim'
 Plug 'luochen1990/rainbow' "color for Parenthesis
-Plug 'crusoexia/vim-monokai' "color
 Plug 'dracula/vim', { 'as': 'dracula' } "color
 Plug 'sainnhe/everforest' "color
-Plug 'tomasr/molokai' "color
-Plug 'NLKNguyen/papercolor-theme' "color
+Plug 'erichdongubler/vim-sublime-monokai' "color
 Plug 'preservim/nerdcommenter' 
 Plug 'vim-scripts/c.vim', {'for': 'c'}
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
@@ -43,7 +38,6 @@ Plug 'inkarkat/vim-ingo-library'
 Plug 'ryanoasis/vim-devicons'
 Plug 'mlaursen/vim-react-snippets', {'for': 'jsx'}
 Plug 'plasticboy/vim-markdown', {'for': ['markdown', 'md']}
-Plug 'rust-lang/rust.vim', {'for': ['rs', 'rust']}
 Plug 'w0rp/ale', { 'do': 'pip install flake8 isort yapf' }
 Plug 'othree/html5.vim'
 Plug 'evanleck/vim-svelte', {'branch': 'main'}
@@ -193,11 +187,20 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
+" color 
+syntax on
+colorscheme sublimemonokai
+
+let g:sublimemonokai_term_italic = 1
+
 nnoremap <silent><expr><leader>bg printf(":set bg=%s \| colo %s\r",&bg==# 'dark' ? 'light' : 'dark', &bg ==# 'dark' ? 'everforest' :
-      \'molokai')
+      \'sublimemonokai')
 
   " For dark version.
         set background=dark
+        let g:sublimemonokai = 1
+        colorscheme sublimemonokai
+
 
         " For light version.
         "set background=light
@@ -209,9 +212,6 @@ nnoremap <silent><expr><leader>bg printf(":set bg=%s \| colo %s\r",&bg==# 'dark'
 
         " For better performance
         let g:everforest_better_performance = 1
-
-        let g:molokai_original = 1
-        colorscheme molokai
 
         " Color Scheme
 hi Normal ctermbg=16 guibg=#111110
@@ -256,11 +256,6 @@ command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 
 " Create default mappings
 let g:NERDCreateDefaultMappings = 1
-
-" Vue
-let g:LanguageClient_serverCommands = {
-    \ 'vue': ['vls']
-    \ }
 
 nnoremap <C-p> :FZF<CR>
 let g:fzf_action = {
