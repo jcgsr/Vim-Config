@@ -17,6 +17,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jiangmiao/auto-pairs' "this will auto close ( [ {
+Plug 'vim-autoformat/vim-autoformat'
 Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
@@ -26,7 +27,7 @@ Plug 'luochen1990/rainbow' "color for Parenthesis
 Plug 'dracula/vim', { 'as': 'dracula' } "color
 Plug 'sainnhe/everforest' "color
 Plug 'erichdongubler/vim-sublime-monokai' "color
-Plug 'preservim/nerdcommenter' 
+Plug 'preservim/nerdcommenter'
 Plug 'vim-scripts/c.vim', {'for': 'c'}
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'sirver/ultisnips'
@@ -58,7 +59,7 @@ filetype plugin on
 filetype indent on
 set hlsearch
 nnoremap <CR> :noh<CR><CR>
-set clipboard=unnamedplus 
+set clipboard=unnamedplus
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_SR = "\<Esc>]50;CursorShape=2\x7"
 let &t_EI = "\<Esc>]50;CursorShape=0\x7"
@@ -66,7 +67,7 @@ let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 syntax sync fromstart
 
 set termguicolors
-set t_Co=256 
+set t_Co=256
 set term=xterm-256color
 
 set colorcolumn=72
@@ -97,8 +98,8 @@ imap <C-s> <Esc>:w<CR>
 
 nmap ; :
 
-" Copy to clipboard
-noremap <C-y> "*y
+  " Copy to clipboard
+  noremap <C-y> "*y
 noremap <C-p> "*p
 
 " screens
@@ -110,7 +111,7 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 
-" tabs 
+" tabs
 nnoremap <leader>t <Esc>:tabnew<CR>
 nnoremap <tab> gt
 
@@ -119,32 +120,32 @@ nnoremap <leader>e $
 
 " cursor_behaviour
 augroup cursor_behaviour
-    autocmd!
+  autocmd!
 
-    " reset cursor on start:
-    autocmd VimEnter * silent !echo -ne "\e[2 q"
-    " cursor blinking bar on insert mode
-    let &t_SI = "\e[5 q"
-    " cursor steady block on command mode
-    let &t_EI = "\e[2 q"
+  " reset cursor on start:
+  autocmd VimEnter * silent !echo -ne "\e[2 q"
+  " cursor blinking bar on insert mode
+  let &t_SI = "\e[5 q"
+  " cursor steady block on command mode
+  let &t_EI = "\e[2 q"
 
-    " highlight current line when in insert mode
-    autocmd InsertEnter * set cursorline
-    " turn off current line highlighting when leaving insert mode
-    autocmd InsertLeave * set nocursorline
+  " highlight current line when in insert mode
+  autocmd InsertEnter * set cursorline
+  " turn off current line highlighting when leaving insert mode
+  autocmd InsertLeave * set nocursorline
 
 augroup END
 
-" moving lines 
+" moving lines
 nnoremap <leader><up> <Esc>:move -2<CR>
 nnoremap <leader><down> <Esc>:move +1<CR>
 vnoremap <leader><up> <Esc>:move -2<CR>
 vnoremap <leader><down> <Esc>:move +1<CR>
 
-" select and replace 
+" select and replace
 nnoremap <leader>ss <Esc>gnc
 
-"git 
+"git
 nnoremap <leader>gs <Esc>:Git status<CR>
 nnoremap <leader>ga <Esc>:Git add .<left><left><left><CR>
 nnoremap <leader>gp <Esc>:Git push<CR>
@@ -158,17 +159,17 @@ let g:NERDTreeStatusline = ''
 
 "nerdtree-git-plugin
 let g:NERDTreeGitStatusIndicatorMapCustom = {
-    \ "Modified"  : "✹",
-    \ "Staged"    : "✚",
-    \ "Untracked" : "✭",
-    \ "Renamed"   : "➜",
-    \ "Unmerged"  : "═",
-    \ "Deleted"   : "✖",
-    \ "Dirty"     : "✗",
-    \ "Clean"     : "✔︎",
-    \ 'Ignored'   : '☒',
-    \ "Unknown"   : "?"
-    \ }
+      \ "Modified"  : "✹",
+      \ "Staged"    : "✚",
+      \ "Untracked" : "✭",
+      \ "Renamed"   : "➜",
+      \ "Unmerged"  : "═",
+      \ "Deleted"   : "✖",
+      \ "Dirty"     : "✗",
+      \ "Clean"     : "✔︎",
+      \ 'Ignored'   : '☒',
+      \ "Unknown"   : "?"
+      \ }
 
 " Automaticaly close nvim if NERDTree is only thing left open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -179,6 +180,10 @@ nnoremap <silent> <leader>n :NERDTreeToggle<CR>
 " C compile
 map <F8> :w <CR> :!gcc % -o %< && ./%< <CR>
 
+" C format
+au BufWrite * :Autoformat
+
+
 " True colors
 if (has("nvim"))
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
@@ -187,7 +192,7 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
-" color 
+" color
 syntax on
 colorscheme sublimemonokai
 
@@ -196,24 +201,24 @@ let g:sublimemonokai_term_italic = 1
 nnoremap <silent><expr><leader>bg printf(":set bg=%s \| colo %s\r",&bg==# 'dark' ? 'light' : 'dark', &bg ==# 'dark' ? 'everforest' :
       \'sublimemonokai')
 
-  " For dark version.
-        set background=dark
-        let g:sublimemonokai = 1
-        colorscheme sublimemonokai
+" For dark version.
+set background=dark
+let g:sublimemonokai = 1
+colorscheme sublimemonokai
 
 
-        " For light version.
-        "set background=light
+" For light version.
+"set background=light
 
-        " Set contrast.
-        " This configuration option should be placed before `colorscheme everforest`.
-        " Available values: 'hard', 'medium'(default), 'soft'
-        let g:everforest_background = 'soft'
+" Set contrast.
+" This configuration option should be placed before `colorscheme everforest`.
+" Available values: 'hard', 'medium'(default), 'soft'
+let g:everforest_background = 'soft'
 
-        " For better performance
-        let g:everforest_better_performance = 1
+" For better performance
+let g:everforest_better_performance = 1
 
-        " Color Scheme
+" Color Scheme
 hi Normal ctermbg=16 guibg=#111110
 hi LineNr ctermbg=16 guibg=#111110
 
@@ -222,25 +227,25 @@ hi LineNr ctermbg=16 guibg=#111110
 
 let g:user_emmet_leader_key='<Tab>'
 let g:user_emmet_settings = {
-  \  'javascript.jsx' : {
-    \      'extends' : 'jsx',
-    \  },
-  \}
+      \  'javascript.jsx' : {
+      \      'extends' : 'jsx',
+      \  },
+      \}
 
 " COC
 let g:coc_global_extensions = [
-    \  'coc-snippets',
-    \  'coc-emmet',
-    \  'coc-html',
-    \  'coc-css',
-    \  'coc-json', 
-    \  'coc-phpls',
-    \  'coc-yaml',
-    \  'coc-prettier',
-    \  'coc-eslint',
-    \  'coc-jedi',
-    \  'coc-rust-analyzer',
-    \   ]
+      \  'coc-snippets',
+      \  'coc-emmet',
+      \  'coc-html',
+      \  'coc-css',
+      \  'coc-json',
+      \  'coc-phpls',
+      \  'coc-yaml',
+      \  'coc-prettier',
+      \  'coc-eslint',
+      \  'coc-jedi',
+      \  'coc-rust-analyzer',
+      \   ]
 
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 nmap <silent> gd <Plug>(coc-definition)
@@ -259,10 +264,10 @@ let g:NERDCreateDefaultMappings = 1
 
 nnoremap <C-p> :FZF<CR>
 let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-s': 'split',
-  \ 'ctrl-v': 'vsplit'
-  \}
+      \ 'ctrl-t': 'tab split',
+      \ 'ctrl-s': 'split',
+      \ 'ctrl-v': 'vsplit'
+      \}
 
 " Brackets/Parenthesis color
 let g:rainbow_active = 1
@@ -270,11 +275,11 @@ let g:rainbow_active = 1
 " Ale
 let g:ale_fix_on_save = 1
 let g:ale_fixers = {
-\   'python': [
-\       'isort',
-\       'yapf',
-\       'remove_trailing_lines',
-\       'trim_whitespace'
-\   ],
-\   'javascript': ['prettier']
-\}
+      \   'python': [
+      \       'isort',
+      \       'yapf',
+      \       'remove_trailing_lines',
+      \       'trim_whitespace'
+      \   ],
+      \   'javascript': ['prettier']
+      \}
