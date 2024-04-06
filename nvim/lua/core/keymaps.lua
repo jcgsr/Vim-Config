@@ -91,3 +91,6 @@ g["prettier#quickfix_enabled"] = "1"
 g["prettier#config#single_quote"] = "true"
 g["prettier#config#trailing_comma"] = "es5"
 g["prettier#config#semi"] = "true"
+
+-- C compile
+map("n", "<F8>", ":w <CR> :!gcc % -o %< && ./%< <CR>", opts)
