@@ -42,6 +42,7 @@ Plug 'plasticboy/vim-markdown', {'for': ['markdown', 'md']}
 Plug 'w0rp/ale', { 'do': 'pip install flake8 isort yapf' }
 Plug 'othree/html5.vim'
 Plug 'evanleck/vim-svelte', {'branch': 'main'}
+Plug 'gko/vim-coloresque'
 call plug#end()
 
 "Seção de configuração
